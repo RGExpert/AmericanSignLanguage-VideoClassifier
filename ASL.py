@@ -49,6 +49,7 @@ with mp_hands.Hands(
                 pred_class = np.argmax(y_pred, axis=1)
                 pred_label = label_encoder.inverse_transform(pred_class)[0]
 
+                print("\033c")
                 print(f"Predicted letter: {pred_label}")
 
         cv2.imshow('MediaPipe Hands', cv2.flip(image, 1))
