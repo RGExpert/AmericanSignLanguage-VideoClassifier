@@ -49,20 +49,10 @@ def run_model_on_video():
 
             result = landmarker.detect(mp_image)
 
-            if not result.hand_landmarks:
-                continue
-
             img.flags.writeable = True
             img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-
+            flipped_img = cv2.flip(img, 1)
             for hand_landmarks in result.hand_landmarks:
-                # mp_drawing.draw_landmarks(
-                #     img,
-                #     hand_landmarks,
-                #     mp_hands.HAND_CONNECTIONS,
-                # mp_drawing_styles.get_default_hand_landmarks_style(),
-                # mp_drawing_styles.get_default_hand_connections_style())
-
                 vectorized_data = vectorize(hand_landmarks)
                 X = np.array(vectorized_data).reshape(1, -1)
                 y_pred = model.predict(X, verbose=0)    # type: ignore
@@ -70,10 +60,18 @@ def run_model_on_video():
                 pred_class = np.argmax(y_pred, axis=1)
                 pred_label = label_encoder.inverse_transform(pred_class)[0]
 
-                print("\033c")
-                print(f"Predicted letter: {pred_label}")
+                if pred_label:
+                    cv2.putText(
+                        flipped_img,
+                        f"{pred_label}",
+                        org=(50, 50),
+                        fontFace=cv2.FONT_HERSHEY_SIMPLEX,
+                        fontScale=1.5,
+                        color=(255, 255, 255),
+                        thickness=3
+                    )
 
-            cv2.imshow('MediaPipe Hands', cv2.flip(img, 1))
+            cv2.imshow('MediaPipe Hands', flipped_img)
             if cv2.waitKey(5) & 0xFF == 27:
                 break
     cap.release()
