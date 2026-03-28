@@ -4,7 +4,5 @@ aslamerican-sign-language-aplhabet-dataset.zip
 tmp
 references
 __pycache__
-*.pkl
-*.keras
 *.npy
 .*

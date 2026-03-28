@@ -6,4 +6,4 @@ scikit-learn
 joblib
 mediapipe
 kagglehub
-
+tensorflow
