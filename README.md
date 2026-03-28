@@ -46,3 +46,4 @@ Or you can retrain the model from scratch:
 ```bash
 python train.py
 ```
+Of course if you want to do so you need to download the dataset, which you can do with the `dowload_data.py` script
