@@ -76,10 +76,9 @@ def process_images(base_dir, max_images=100):
 
 
 if __name__ == "__main__":
-    train_dir = "ASL_Alphabet_Dataset/asl_alphabet_train"  # Adjust the path to your dataset
+    train_dir = "ASL_Alphabet_Dataset/asl_alphabet_train"
     features, labels = process_images(train_dir)
 
-    # Now features and labels are ready for machine learning
     print(f"Total samples: {len(features)}")
     print(f"Feature shape: {features.shape}")
     print(f"Labels shape: {labels.shape}")
