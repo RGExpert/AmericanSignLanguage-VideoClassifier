@@ -199,5 +199,5 @@ def train(
 
 if __name__ == "__main__":
     train_dir = "data/ASL_Alphabet_Dataset/asl_alphabet_train"
-    train(train_dir, False)
+    train(train_dir, True)
 
